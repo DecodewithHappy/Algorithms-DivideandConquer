@@ -3,7 +3,8 @@
 using namespace std;
 
 int Min(int, int);
-void merge_sort_iter(int [], int, int);
+//void merge_sort_iter(int [], int, int);
+void merge_sort_recur(int [], int, int);
 void merge(int [], int, int, int);
 
 int main(){
@@ -15,7 +16,7 @@ int main(){
     {
         cin >> a[i];
     }
-    merge_sort_iter(a, 0, n-1);
+    merge_sort_recur(a, 0, n-1);
     cout << "\n" << "After Sorting : "; 
     for(i=0; i<n; i++){
         cout << a[i] << " ";
@@ -24,7 +25,7 @@ int main(){
     return 0;
 }
 
-int Min(int x, int y){
+/*int Min(int x, int y){
     if(x < y){
         return x;
     }else{
@@ -51,7 +52,20 @@ void merge_sort_iter(int a[50], int low, int high){
         i = 2*i;
         
     }
+} */
+
+void merge_sort_recur(int a[50], int low, int high)
+{
+    if (low >= high){
+        return;
+    }
+    int middle = (low + high) / 2;
+
+    merge_sort_recur(a, low, middle);
+    merge_sort_recur(a, middle + 1, high);
+    merge(a, low, middle, high);
 }
+
 
 void merge(int a[50], int lb, int m, int ub){
     int i, j, k, n1, n2;
