@@ -10,9 +10,10 @@ int main(){
     void prepend(Node**, int);
     void displayList(Node *);
     void append(Node**, int);
-    void insert_before_value(Node **, int, int);
+    int insert_before_value(Node **, int, int, int *);
+    int Search(Node **, int, int *);
     Node* start = NULL;
-    int ch, value, Svalue;
+    int ch, value, Svalue, loc;
     while(1){
         cout << "\n\t\t\tMENU\t\t\t\n";
 
@@ -35,16 +36,27 @@ int main(){
                   append(&start, value);
                   break;
             case 3:
-                  cout << "\nEnter data to inser in the list\n";
+                  cout << "\nEnter data to insert in the list\n";
                   cin >> value;
                   cout << "\nEnter data before which you like to insert value\n";
                   cin >> Svalue;
-                  insert_before_value(&start, Svalue, value);
+                  insert_before_value(&start, Svalue, value, &loc);
+                  if(loc == (-1)){
+                      cout << "\nValue is not present\n";
+                  }
                   break;
             case 4:
                   displayList(start);
                   break;
             case 5:
+                  cout<<"\nEnter data to search\n";
+                  cin >> Svalue;
+                  Search(&start, Svalue, &loc);
+                  if(loc != (-1)){
+                      cout << "\nValue found at location :" << loc;
+                  }else{
+                      cout << "\nValue not found\n";
+                  }
                   break;
             case 7: 
                   return 0;
@@ -81,7 +93,8 @@ void append(Node** start, int value){
     return;
 }
 
-void insert_before_value(Node **start, int Svalue, int value){
+int insert_before_value(Node **start, int Svalue, int value, int *loc){
+    (*loc) = 1;
     Node *newnode = new Node;
     Node *ptr = (*start);
     Node *prev = ptr;
@@ -89,18 +102,36 @@ void insert_before_value(Node **start, int Svalue, int value){
 
     if((*start) == NULL){
         (*start) = newnode;
-        return;
+        return (*loc);
     }
 
     while(ptr != NULL){
         if(ptr->data == Svalue){
             newnode->next = ptr;
             prev->next = newnode;
-            return;
+            return (*loc);
         }
+        (*loc) = (*loc) + 1;
         prev = ptr;
         ptr = ptr->next;
     }
+    (*loc) = -1;
+    return (*loc);
+}
+
+int Search(Node **start, int Svalue, int (*loc)){
+    Node *ptr = (*start);
+    (*loc) = 1;
+
+    while(ptr != NULL){
+        if(ptr->data == Svalue){
+            return (*loc);
+        }
+        (*loc) = (*loc) + 1;
+        ptr = ptr->next;
+    }
+    (*loc) = -1;
+    return (*loc);
 }
 
 void displayList(Node *node){
