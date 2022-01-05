@@ -10,10 +10,13 @@ int main(){
     void prepend(Node**, int);
     void displayList(Node *);
     void append(Node**, int);
+    void insert_before_value(Node **, int, int);
     Node* start = NULL;
-    int ch, value;
+    int ch, value, Svalue;
     while(1){
-        cout << "\n\n1:Prepend\t\t2:Append\t\t3:After a value\n";
+        cout << "\n\t\t\tMENU\t\t\t\n";
+
+        cout << "1:Prepend\t\t2:Append\t\t3:Before a value\n";
 
         cout << "4:Display\t\t5:Search\t\t6:Delete\n";
 
@@ -32,6 +35,11 @@ int main(){
                   append(&start, value);
                   break;
             case 3:
+                  cout << "\nEnter data to inser in the list\n";
+                  cin >> value;
+                  cout << "\nEnter data before which you like to insert value\n";
+                  cin >> Svalue;
+                  insert_before_value(&start, Svalue, value);
                   break;
             case 4:
                   displayList(start);
@@ -71,6 +79,28 @@ void append(Node** start, int value){
 
     lastnode->next = newnode;
     return;
+}
+
+void insert_before_value(Node **start, int Svalue, int value){
+    Node *newnode = new Node;
+    Node *ptr = (*start);
+    Node *prev = ptr;
+    newnode->data = value;
+
+    if((*start) == NULL){
+        (*start) = newnode;
+        return;
+    }
+
+    while(ptr != NULL){
+        if(ptr->data == Svalue){
+            newnode->next = ptr;
+            prev->next = newnode;
+            return;
+        }
+        prev = ptr;
+        ptr = ptr->next;
+    }
 }
 
 void displayList(Node *node){
