@@ -9,6 +9,7 @@ typedef struct Node{
 int main(){
     void prepend(Node**, int);
     void displayList(Node *);
+    void append(Node**, int);
     Node* start = NULL;
     int ch, value;
     while(1){
@@ -26,6 +27,9 @@ int main(){
                   prepend(&start, value);
                   break;
             case 2:
+                  cout<<"\nEnter data to append in the list\n";
+                  cin >> value;
+                  append(&start, value);
                   break;
             case 3:
                   break;
@@ -51,6 +55,24 @@ void prepend(Node** start, int value){
 
 }
 
+void append(Node** start, int value){
+    Node* newnode = new Node; 
+    Node* lastnode = (*start);
+    newnode->data = value;
+    newnode->next = NULL;
+
+    if((*start) == NULL){
+        (*start) = newnode;
+        return;
+    }
+    while((lastnode->next) != NULL){
+        lastnode = lastnode->next;
+    }
+
+    lastnode->next = newnode;
+    return;
+}
+
 void displayList(Node *node){
     cout << "\n\n";
     while(node != NULL){
@@ -61,3 +83,4 @@ void displayList(Node *node){
         cout << "NULL\n\n";
     }
 }
+
