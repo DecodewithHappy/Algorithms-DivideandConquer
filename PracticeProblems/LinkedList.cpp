@@ -94,6 +94,7 @@ void append(Node** start, int value){
 }
 
 int insert_before_value(Node **start, int Svalue, int value, int *loc){
+
     (*loc) = 1;
     Node *newnode = new Node;
     Node *ptr = (*start);
@@ -105,13 +106,18 @@ int insert_before_value(Node **start, int Svalue, int value, int *loc){
         return (*loc);
     }
 
+    if((*start)->data == Svalue){
+        newnode->next = (*start);
+       (*start) = newnode;
+        return (*loc);
+    }
+
     while(ptr != NULL){
         if(ptr->data == Svalue){
             newnode->next = ptr;
             prev->next = newnode;
             return (*loc);
         }
-        (*loc) = (*loc) + 1;
         prev = ptr;
         ptr = ptr->next;
     }
