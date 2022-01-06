@@ -12,6 +12,7 @@ int main(){
     void append(Node**, int);
     int insert_before_value(Node **, int, int, int *);
     int Search(Node **, int, int *);
+    int Delete(Node **, int, int *);
     Node* start = NULL;
     int ch, value, Svalue, loc;
     while(1){
@@ -58,6 +59,16 @@ int main(){
                       cout << "\nValue not found\n";
                   }
                   break;
+            case 6:
+                  cout<<"\nEnter data to delete\n";
+                  cin >> Svalue;
+                  Delete(&start, Svalue, &loc);
+                  if(loc != (-1)){
+                      cout << "\nValue Deleted\n";
+                  }else{
+                      cout << "\nCannot Delete !!! Value not found\n";
+                  }
+                  break;     
             case 7: 
                   return 0;
             default: cout << "\nWrong Input\n";
@@ -65,18 +76,16 @@ int main(){
     }
 }
 
-void prepend(Node** start, int value){
+void prepend(Node** start, int value){ //value will be added at front of the list
     Node* newnode = new Node; //create and allocate new node
-
     newnode->data = value;
     newnode->next = (*start);
-
     (*start) = newnode;
 
 }
 
-void append(Node** start, int value){
-    Node* newnode = new Node; 
+void append(Node** start, int value){ //value will be added at the end of the list
+    Node* newnode = new Node; //create and allocate new node
     Node* lastnode = (*start);
     newnode->data = value;
     newnode->next = NULL;
@@ -85,10 +94,9 @@ void append(Node** start, int value){
         (*start) = newnode;
         return;
     }
-    while((lastnode->next) != NULL){
+    while((lastnode->next) != NULL){  
         lastnode = lastnode->next;
     }
-
     lastnode->next = newnode;
     return;
 }
@@ -134,6 +142,29 @@ int Search(Node **start, int Svalue, int (*loc)){
             return (*loc);
         }
         (*loc) = (*loc) + 1;
+        ptr = ptr->next;
+    }
+    (*loc) = -1;
+    return (*loc);
+}
+
+int Delete(Node **start, int Svalue, int (*loc)){
+    Node *ptr = (*start);
+    Node *prev = ptr;
+    (*loc) = 1;
+
+    if((*start)->data == Svalue){
+        (*start) = (*start)->next;
+        return (*loc);
+    }
+
+    while(ptr != NULL){
+        if(ptr->data == Svalue){
+            prev->next = ptr->next;
+            return (*loc);
+        }
+        (*loc) = (*loc) + 1;
+        prev = ptr;
         ptr = ptr->next;
     }
     (*loc) = -1;
