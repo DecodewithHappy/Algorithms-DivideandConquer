@@ -42,12 +42,14 @@ int main(){
             case 5:
                  return 0;
                  break;
-            default: 
+            default:
+                 cout << "\nInvalid Choice!!!\n";
                  break;
         }
     }
 }
 
+//insert func to enter elements inside the array
 int insert(int arr[MAX], int (*n), int value){
     if((*n) == MAX){
         return -1;
@@ -57,6 +59,7 @@ int insert(int arr[MAX], int (*n), int value){
     return 1;
 }
 
+//display func to display the array elements
 void display(int arr[MAX], int n){
     int i;
     if(n == 0){
@@ -75,6 +78,8 @@ void swap(int (*value1), int (*value2)){
     (*value1) = (*value2);
     (*value2) = t;
 }
+
+//to maintain the max-heap property in a tree where both sub-trees are max-heaps, we need to run heapify on the root element repeatedly until it is larger than its children or it becomes a leaf node.
 
 void heapify(int arr[MAX], int n, int i){
     void swap(int *, int *);
@@ -96,6 +101,8 @@ void heapify(int arr[MAX], int n, int i){
     }
 }
 
+//We will apply this buildheap func to the non-leaf nodes as leaf nodes are already considered heap
+//This is a bottom-up process
 void BuildHeap(int arr[MAX], int n){
     void heapify(int [MAX], int, int);
     int i;
@@ -108,7 +115,11 @@ void HeapSort(int arr[MAX], int n){
     int i;
     BuildHeap(arr, n);
     for(i=(n-1); i>=0; i--){
-        swap(arr[0], arr[i]);
+        swap(arr[0], arr[i]);// swapping of last-element and the root node will take place initially
         heapify(arr, i, 0);
     }
 }
+
+//let the initial array be arr = [1,12,9,5,6,10]
+//after heapify arr = [12,6,10,5,1,9]
+//after heapsort arr = [1,5,6,9,10,12]
