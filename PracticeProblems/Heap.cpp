@@ -7,7 +7,8 @@ int main(){
     int insert(int [MAX], int *, int);
     void display(int [MAX], int);
     void BuildHeap(int [MAX], int);
-    
+    void HeapSort(int [MAX], int);
+
     int ch, arr[MAX], n, value, result;
     n = 0;
     while(1){
@@ -36,6 +37,7 @@ int main(){
                  BuildHeap(arr, n);
                  break;
             case 4:
+                 HeapSort(arr, n);
                  break;
             case 5:
                  return 0;
@@ -99,5 +101,14 @@ void BuildHeap(int arr[MAX], int n){
     int i;
     for(i=n/2; i>=0; i--){
         heapify(arr, n, i);
+    }
+}
+
+void HeapSort(int arr[MAX], int n){
+    int i;
+    BuildHeap(arr, n);
+    for(i=(n-1); i>=0; i--){
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
     }
 }
