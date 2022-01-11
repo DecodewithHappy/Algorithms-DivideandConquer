@@ -6,6 +6,8 @@ using namespace std;
 int main(){
     int insert(int [MAX], int *, int);
     void display(int [MAX], int);
+    void BuildHeap(int [MAX], int);
+    
     int ch, arr[MAX], n, value, result;
     n = 0;
     while(1){
@@ -31,6 +33,7 @@ int main(){
                  display(arr, n);
                  break;
             case 3:
+                 BuildHeap(arr, n);
                  break;
             case 4:
                  break;
@@ -62,4 +65,39 @@ void display(int arr[MAX], int n){
        cout << arr[i] << " ";
     }
     cout << endl;
+}
+
+void swap(int (*value1), int (*value2)){
+    int t;
+    t = (*value1);
+    (*value1) = (*value2);
+    (*value2) = t;
+}
+
+void heapify(int arr[MAX], int n, int i){
+    void swap(int *, int *);
+    int largest = i;
+    int left = (2*i+1);
+    int right = (2*i+2);
+
+    if((left < n) && (arr[left] > arr[largest])){
+        largest = left;
+    }
+
+    if((right < n) && (arr[right] > arr[largest])){
+        largest = right;
+    }
+
+    if(largest != i){
+        swap(&arr[i], &arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void BuildHeap(int arr[MAX], int n){
+    void heapify(int [MAX], int, int);
+    int i;
+    for(i=n/2; i>=0; i--){
+        heapify(arr, n, i);
+    }
 }
