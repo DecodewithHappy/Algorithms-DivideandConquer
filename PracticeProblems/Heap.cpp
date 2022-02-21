@@ -37,6 +37,7 @@ int main(){
                  BuildHeap(arr, n);
                  break;
             case 4:
+                 cout << "\nResult after sorting\n";
                  HeapSort(arr, n);
                  break;
             case 5:
