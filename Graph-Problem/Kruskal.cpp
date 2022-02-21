@@ -54,17 +54,17 @@ int create_matrix(int adj[MAX][MAX], int *n)
 void display_adjacency(int adj[MAX][MAX], int n)
 {
    int i, j;
-   printf( "\n\nThe Adjacency Matrix is :- \n" );
+   cout << endl << "The Adjacency Matrix is :" << endl;
    i = 0;
    while(i < n)
    {
       j = 0;
       while(j < n)
       {
-         printf(" %d\t", adj[i][j]);
+         cout << "\t" << adj[i][j];
          j = (j + 1);
       }
-      printf("\n\n");
+      cout << "\n\n";
       i = (i +1);
    }
    return ;
@@ -168,14 +168,15 @@ void display(edge MST[MAX], int l)
    i = 0;
    while(i < l)
    {
+     cout << 
      printf("\n%d\t%d\t%d", (MST[i].u), (MST[i].v), (MST[i].w));
      cost = (cost + (MST[i].w)); 
      i = i+1;
    }
    printf("\n\nCost of the spanning tree = %d", cost);
    return ;
-}*/
-
+}
+*/
 
 
 
